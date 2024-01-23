@@ -1,0 +1,44 @@
+.homework_page {
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+  }
+.homework_page_container {
+    width: 70%;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+.sidebar {
+    background-color: rgb(143, 185, 188);
+    width: 30%;
+    max-width: 300px;
+    margin-right: 10px;
+}
+.header {
+    background-color: rgb(141, 227, 233);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+.content {
+    margin: 5px 0 ;
+    padding: 20px;
+    background-color:rgb(165, 225, 229);
+  }  
+.footer {
+    background-color: rgb(134, 171, 174);
+    padding-top: 22px;
+}
+.users div {
+  text-align: left;
+}  
+.imgeButton button {
+  display: flex;
+}
+img {
+  margin: 5px 5px 5px 5px;
+}
+button {
+  margin: 2px;
+}
