@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
-import { v4 } from 'uuid';
 
 import style from '../css/styles.module.css';
 
@@ -61,14 +60,15 @@ export class Comments extends Component {
             {postId: 10, id: 50, name: 'dolorum soluta quidem ex quae occaecati dicta aut doloribus', email: 'Kiana_Predovic@yasmin.io', body: 'eum accusamus aut delectus\narchitecto blanditiis q…r vel corrupti inventore\nanimi dicta vel corporis'}
         ]
     }
-     deleteComment = (e) => {
-        this.setState({
-            arrComments: this.state.arrComments.filter((el, i) => i !== parseInt(e.target.value))
-        });
+    deleteComment = (commentId) => {
+        this.setState((prevState) => ({
+            arrComments: prevState.arrComments.filter(comment => comment.id !== commentId)
+        }));
     };
 
-    handleIdChange = (e) => {
-        this.setState({ filterId: e.target.value });
+    handleFilterIdChange = (e) => {
+        const filterId = e.target.value;
+        this.setState({ filterId });
     }
 
     render() {
@@ -83,13 +83,13 @@ export class Comments extends Component {
                     type="text"
                     placeholder='Фільтр по ID'
                     value={this.state.filterId}
-                    onChange={this.handleIdChange}
+                    onChange={this.handleFilterIdChange}
                 />
 
-                {filteredComments.map((comment, i) => (
-                    <div key={v4()}>
+                {filteredComments.map(comment => (
+                    <div key={comment.id}>
                         {comment.postId} - {comment.id} - {comment.name} - {comment.email} - {comment.body} 
-                        <button value={i} onClick={this.deleteComment}>Del</button>
+                        <button onClick={() => this.deleteComment(comment.id)}>Del</button>
                     </div>
                 ))}
             </div>
@@ -98,8 +98,13 @@ export class Comments extends Component {
 }
 
 Comments.propTypes = {
-    postId: 1, id: PropTypes.number, 
-    name: PropTypes.string, 
-    email: PropTypes.string, 
-    body: PropTypes.string,
-}
+    arrComments: PropTypes.arrayOf(
+        PropTypes.shape({
+            postId: PropTypes.number,
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired,
+            body: PropTypes.string.isRequired,
+        })
+    ),
+};
